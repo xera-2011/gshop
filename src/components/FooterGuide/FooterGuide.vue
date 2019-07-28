@@ -5,19 +5,19 @@
         <span class="iconfont icon-waimai"></span>
         <span class="mui-tab-label">外卖</span>
       </router-link>-->
-      <router-link class="mui-tab-item1" to="/msite">
+      <router-link class="mui-tab-item1" to="/msite" :class="{on: '/msite'===$route.path}">
         <span class="iconfont icon-waimai mui-icon"></span>
         <span class="mui-tab-label">外卖</span>
       </router-link>
-      <router-link class="mui-tab-item1" to="/search">
+      <router-link class="mui-tab-item1" to="/search" :class="{on: '/search'===$route.path}">
         <span class="iconfont icon-search mui-icon"></span>
         <span class="mui-tab-label">搜索</span>
       </router-link>
-      <router-link class="mui-tab-item1" to="/oder">
+      <router-link class="mui-tab-item1" to="/order" :class="{on: '/order'===$route.path}">
         <span class="iconfont icon-dingdan mui-icon"></span>
         <span class="mui-tab-label">订单</span>
       </router-link>
-      <router-link class="mui-tab-item1" to="/profile">
+      <router-link class="mui-tab-item1" to="/profile" :class="{on: '/profile'===$route.path}">
         <span class="iconfont icon-geren mui-icon"></span>
         <span class="mui-tab-label">我的</span>
       </router-link>
@@ -37,9 +37,9 @@
     font-size: 22px;
     display: inline-block;
   }
-  .mui-bar-tab .mui-tab-item1.mui-active {
-    color: #02a774;
-  }
+  // .mui-bar-tab .mui-tab-item1.mui-active {
+  //   color: #02a774;
+  // }
   .mui-bar-tab .mui-tab-item1 {
     display: table-cell;
     overflow: hidden;
@@ -61,6 +61,9 @@
     display: block;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+  .on {
+    color: #02a774 !important;
   }
 }
 </style>

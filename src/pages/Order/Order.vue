@@ -1,5 +1,5 @@
 <template>
-  <div class="oder_container">
+  <div class="order_container">
     <HeaderTop title="订单列表"></HeaderTop>
     <section class="order_no_login">
       <img src="./images/person.png" alt />
@@ -25,7 +25,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.oder_container {
+.order_container {
   margin-top: 45px;
   .order_no_login {
     img {

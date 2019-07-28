@@ -1,175 +1,73 @@
 <template>
   <div class="shop-container">
-    <ul>
-      <li class="shop-li">
+    <!-- v-if判断是否已经获取到数据 -->
+    <ul v-if="shops.length">
+      <li class="shop-li" v-for="shop in shops" :key="shop.id" @click="$router.push('/shop')">
         <a href="#" class="shop-a">
           <div class="shop-left">
-            <img src="./images/shop/1.jpg" alt />
+            <!-- <img src="./images/shop/1.jpg" alt /> -->
+            <!-- 图片失败的处理效果 -->
+            <img :src="baseImgUrl" />
           </div>
           <div class="shop-right">
             <section class="shop-1">
               <span>品牌</span>
               <div class="shop-title">
-                <h3>谁知盘中餐,粒粒皆幸苦</h3>
+                <h3>{{shop.name}}</h3>
                 <ul>
-                  <li>保</li>
-                  <li>准</li>
-                  <li>票</li>
+                  <li v-for="(icon,i) in shop.supports" :key="i">{{icon.icon_name}}</li>
                 </ul>
               </div>
             </section>
             <section class="shop-2">
               <div class="shop-2-left">
-                <div class="star star-24">
-                  <span class="star-item star-item-on"></span>
-                  <span class="star-item star-item-on"></span>
-                  <span class="star-item star-item-on"></span>
-                  <span class="star-item star-item-half"></span>
-                  <span class="star-item star-item-off"></span>
-                </div>
-                <span class="shop-mark">3.6</span>
-                <span>月售108单</span>
+                <!-- 星星评分 -->
+                <Start :score="shop.rating" :size="24"></Start>
+                <span class="shop-mark">{{shop.rating}}</span>
+                <span>月售{{shop.recent_order_num}}单</span>
               </div>
-              <div class="shop-2-right">硅谷专送</div>
+              <div class="shop-2-right">{{shop.delivery_mode.text}}</div>
             </section>
             <section class="shop-3">
               <p>
-                <span>￥20起送</span>
+                <span>￥{{shop.float_minimum_order_amount}}起送</span>
                 <span>/</span>
-                <span>配送费约￥5</span>
-              </p>
-            </section>
-          </div>
-        </a>
-      </li>
-      <li class="shop-li">
-        <a href="#" class="shop-a">
-          <div class="shop-left">
-            <img src="./images/shop/1.jpg" alt />
-          </div>
-          <div class="shop-right">
-            <section class="shop-1">
-              <span>品牌</span>
-              <div class="shop-title">
-                <h3>谁知盘中餐,粒粒皆幸苦</h3>
-                <ul>
-                  <li>保</li>
-                  <li>准</li>
-                  <li>票</li>
-                </ul>
-              </div>
-            </section>
-            <section class="shop-2">
-              <div class="shop-2-left">
-                <div class="star star-24">
-                  <span class="star-item star-item-on"></span>
-                  <span class="star-item star-item-on"></span>
-                  <span class="star-item star-item-on"></span>
-                  <span class="star-item star-item-half"></span>
-                  <span class="star-item star-item-off"></span>
-                </div>
-                <span class="shop-mark">3.6</span>
-                <span>月售108单</span>
-              </div>
-              <div class="shop-2-right">硅谷专送</div>
-            </section>
-            <section class="shop-3">
-              <p>
-                <span>￥20起送</span>
-                <span>/</span>
-                <span>配送费约￥5</span>
-              </p>
-            </section>
-          </div>
-        </a>
-      </li>
-      <li class="shop-li">
-        <a href="#" class="shop-a">
-          <div class="shop-left">
-            <img src="./images/shop/1.jpg" alt />
-          </div>
-          <div class="shop-right">
-            <section class="shop-1">
-              <span>品牌</span>
-              <div class="shop-title">
-                <h3>谁知盘中餐,粒粒皆幸苦</h3>
-                <ul>
-                  <li>保</li>
-                  <li>准</li>
-                  <li>票</li>
-                </ul>
-              </div>
-            </section>
-            <section class="shop-2">
-              <div class="shop-2-left">
-                <div class="star star-24">
-                  <span class="star-item star-item-on"></span>
-                  <span class="star-item star-item-on"></span>
-                  <span class="star-item star-item-on"></span>
-                  <span class="star-item star-item-half"></span>
-                  <span class="star-item star-item-off"></span>
-                </div>
-                <span class="shop-mark">3.6</span>
-                <span>月售108单</span>
-              </div>
-              <div class="shop-2-right">硅谷专送</div>
-            </section>
-            <section class="shop-3">
-              <p>
-                <span>￥20起送</span>
-                <span>/</span>
-                <span>配送费约￥5</span>
-              </p>
-            </section>
-          </div>
-        </a>
-      </li>
-      <li class="shop-li">
-        <a href="#" class="shop-a">
-          <div class="shop-left">
-            <img src="./images/shop/1.jpg" alt />
-          </div>
-          <div class="shop-right">
-            <section class="shop-1">
-              <span>品牌</span>
-              <div class="shop-title">
-                <h3>谁知盘中餐,粒粒皆幸苦</h3>
-                <ul>
-                  <li>保</li>
-                  <li>准</li>
-                  <li>票</li>
-                </ul>
-              </div>
-            </section>
-            <section class="shop-2">
-              <div class="shop-2-left">
-                <div class="star star-24">
-                  <span class="star-item star-item-on"></span>
-                  <span class="star-item star-item-on"></span>
-                  <span class="star-item star-item-on"></span>
-                  <span class="star-item star-item-half"></span>
-                  <span class="star-item star-item-off"></span>
-                </div>
-                <span class="shop-mark">3.6</span>
-                <span>月售108单</span>
-              </div>
-              <div class="shop-2-right">硅谷专送</div>
-            </section>
-            <section class="shop-3">
-              <p>
-                <span>￥20起送</span>
-                <span>/</span>
-                <span>配送费约￥5</span>
+                <span>配送费约￥{{shop.float_delivery_fee}}</span>
               </p>
             </section>
           </div>
         </a>
       </li>
     </ul>
+    <!-- v-else如没有数据则显示图片 -->
+    <ul v-else>
+      <!-- 这里还需要循环一下,但是可以简写 -->
+      <li v-for="item in 6" :key="item.i">
+        <img src="./images/shop_back.svg" alt />
+      </li>
+    </ul>
   </div>
 </template>
 
-<script></script>
+<script>
+import { mapState } from "vuex";
+import Start from "../Star/Star.vue";
+
+export default {
+  data() {
+    return {
+      baseImgUrl:
+        "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1273705978,2860069322&fm=27&gp=0.jpg"
+    };
+  },
+  computed: {
+    ...mapState(["shops"])
+  },
+  components: {
+    Start
+  }
+};
+</script>
 
 <style lang="scss" scoped>
 .shop-container {
@@ -185,7 +83,7 @@
     width: 100%;
     height: 1px;
     background-color: #f1f1f1;
-    z-index: 99;
+    z-index: 9;
   }
   .shop-a {
     display: block;
@@ -247,28 +145,6 @@
         padding: 13px 0 10px;
         .shop-2-left {
           display: flex;
-          .star {
-            .star-item {
-              width: 10px;
-              height: 10px;
-              display: inline-block;
-              margin-right: 3px;
-              background: no-repeat;
-              background-size: 10px 10px !important;
-            }
-            .star-item-on {
-              display: flex;
-              background: url("./images/stars/star24_on@2x.png"); //全星
-            }
-            .star-item-half {
-              display: flex;
-              background: url("./images/stars/star24_half@2x.png"); //半星
-            }
-            display: flex;
-            .star-item-off {
-              background: url("./images/stars/star24_off@2x.png"); //空星星
-            }
-          }
           > span {
             transform: scale(0.85);
             font-size: 10px;

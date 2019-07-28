@@ -3,15 +3,17 @@
     <HeaderTop title="俺的"></HeaderTop>
     <!-- 登录注册(已登录则显示个人信息) -->
     <section class="profile-number">
-      <router-link to="/login" class="profile-link">
+      <!-- 判断是否登录,为此改变这里点击跳转的路由 -->
+      <router-link :to="userInfo._id?'/userinfo':'/login'" class="profile-link">
         <div class="profile-image">
           <i class="iconfont icon-person"></i>
         </div>
         <div class="user-info">
-          <p class="user-info-top">登录/注册</p>
+          <!-- 判断是哪种登录方式登录的,如果userInfo.phone为空则显示 用户名 或者 登录注册 -->
+          <p class="user-info-top" v-if="!userInfo.phone">{{userInfo.name||'登录/注册'}}</p>
           <p class="user-info-bottom">
             <i class="iconfont icon-shouji icon-mobile"></i>
-            <span class="icon-mobile-number">暂无绑定手机号</span>
+            <span class="icon-mobile-number">{{userInfo.phone||'暂无绑定手机号'}}</span>
           </p>
         </div>
         <span class="arrow">
@@ -73,15 +75,36 @@
         </div>
       </a>
     </section>
+    <section>
+      <mt-button @click="logout" type="danger" style="width:100%" v-show="userInfo._id">退出登录</mt-button>
+    </section>
   </div>
 </template>
 
 <script>
+import { MessageBox } from 'mint-ui';
 import HeaderTop from "../../components/HeaderTop/HeaderTop";
+import { mapState } from "vuex";
 
 export default {
   data() {
     return {};
+  },
+  methods: {
+    logout() {
+      MessageBox.confirm("确认退出?").then(
+        // 请求退出
+        action => {
+          this.$store.dispatch("logout");//在vuex中action中发异步送退出请求
+        },
+        action => {
+          console.log("取消退出");
+        }
+      );
+    }
+  },
+  computed: {
+    ...mapState(["userInfo"])
   },
   components: {
     HeaderTop
@@ -99,7 +122,7 @@ export default {
     border-top: 1px solid #fff;
     color: #fff;
     .profile-link {
-      display: inline-block;//如果设置block不行 就inline-block
+      display: inline-block; //如果设置block不行 就inline-block
       width: 100%;
       height: 100%;
     }
@@ -210,22 +233,22 @@ export default {
       .icon-order-s {
         font-size: 30px;
         color: #02a774;
-        padding-top: 15px;
+        padding-top: 8px;
       }
       .icon-jifen {
         font-size: 30px;
         color: #ff5f3e;
-        padding-top: 15px;
+        padding-top: 8px;
       }
       .icon-vip {
         font-size: 30px;
         color: #f90;
-        padding-top: 15px;
+        padding-top: 8px;
       }
       .icon-fuwu {
         font-size: 30px;
         color: #02a774;
-        padding-top: 15px;
+        padding-top: 8px;
       }
       .my-order-div {
         width: 100%;

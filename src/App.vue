@@ -1,7 +1,9 @@
 <template>
   <div class="app-container">
-    <!-- 路由 -->
-    <router-view />
+    <!-- 缓存路由组件对象 -->
+    <keep-alive>
+      <router-view />
+    </keep-alive>
     <!-- 底部 -->
     <FooterGuide v-show="$route.meta.showFooter" />
   </div>
@@ -9,9 +11,17 @@
 
 <script>
 import FooterGuide from "./components/FooterGuide/FooterGuide.vue";
+import { mapActions } from "vuex"; //方法二
+
 export default {
-  data() {
-    return {};
+  // 使用created生命周期钩子,可以更早获取到,mounted会看到延迟
+  mounted() {
+    // 从session会话中获取数据(使用vuex的action的异步获取)
+    // this.$store.dispatch("getUserInfo"); //方法一
+    this.getUserInfo(); //方法二
+  },
+  methods: {
+    ...mapActions(["getUserInfo"]) //方法二
   },
   components: {
     FooterGuide
@@ -37,4 +47,3 @@ body,
   display: none;
 }
 </style>
-
