@@ -11,6 +11,7 @@
     <section class="list" v-if="!noSearchShops">
       <ul class="list_container">
         <!-- to路由跳转也可以写成:to="'/shop?id='+item.id" -->
+        <!-- 这里传参的意思就是跳转入哪家店,用id识别 -->
         <router-link
           tag="li"
           :to="{path:'/shop',query:{id:item.id}}"

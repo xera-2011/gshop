@@ -30,40 +30,42 @@
 <style lang="scss" scoped>
 .footer_guide {
   .mui-bar {
+    box-sizing: border-box; // 加了这个 padding就不会改变盒子宽高了
+    padding-top: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #fff;
     box-shadow: 0 0 0 rgba(0, 0, 0, 0.85);
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    border-top: 0;
+    border-bottom: 0;
+    position: fixed;
+    z-index: 10;
+    right: 0;
+    left: 0;
   }
-  .iconfont {
-    font-size: 22px;
-    display: inline-block;
-  }
-  // .mui-bar-tab .mui-tab-item1.mui-active {
-  //   color: #02a774;
-  // }
   .mui-bar-tab .mui-tab-item1 {
-    display: table-cell;
-    overflow: hidden;
-    width: 1%;
+    padding:0;
+    .iconfont {
+      font-size: 22px;
+      display: inline-block;
+    }
+    width: 25%;
     line-height: 17px;
-    text-align: center;
-    vertical-align: middle;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    color: #929292;
-  }
-
-  .mui-bar-tab .mui-tab-item1 .mui-icon {
-    top: -3px;
-    height: 24px;
-  }
-  .mui-bar-tab .mui-tab-item1 .mui-icon ~ .mui-tab-label {
+    text-align: center; // 居中!!!!!!!!!
+    border-bottom: 0;
     font-size: 11px;
     display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .on {
-    color: #02a774 !important;
+    .mui-icon ~ .mui-tab-label {
+      //选中.mui-icon里出现的所有.mui-tab-label(span)
+      display: block;
+    }
+    &.on {
+      color: #02a774 !important; // 路由高亮属性绑定
+    }
   }
 }
 </style>

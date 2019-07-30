@@ -38,7 +38,6 @@ export default {
   font-size: 16px;
   height: 45px;
   // line-height: 1;
-  padding: 0 10px;
   color: #fff;
   display: flex;
   justify-content: space-between;

@@ -224,7 +224,7 @@ export default {
     .menu-item {
       display: table;
       height: 54px;
-      width: 100%; //------------修改了
+      // width: 100%; //------------修改了
       padding: 0 12px;
       line-height: 14px;
       &.current {

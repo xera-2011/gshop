@@ -118,14 +118,17 @@ export default {
 
     // 异步获取短信
     async getCode() {
-      // 必须要先判断当前没有计时器(也就是this.computedTime===0时),才可以触发该事件,不然有BUG
+      // 1.必须要先判断当前没有计时器(也就是this.computedTime===0时),才可以触发该事件,不然有BUG
       if (!this.computedTime) {
-        this.computedTime = 30; //初始化倒计时为30秒
-        // const intervalId改成this.intervalId,这样后面的函数也能清除这个定时器了
+        // 2.初始化倒计时为30秒
+        this.computedTime = 30;
+        // 3.const intervalId改成this.intervalId,这样后面的函数也能清除这个定时器了
         this.intervalId = setInterval(() => {
+          // 4.时间递减
           this.computedTime--;
+          // 5.当小于0了
           if (this.computedTime <= 0) {
-            //到0了就清除这个定时器
+            // 6.就清除这个定时器
             clearInterval(this.intervalId);
           }
         }, 1000);
@@ -138,15 +141,17 @@ export default {
       const result = await axios.get(
         "./api" + "/sendcode" + "?" + "phone=" + this.phone
       );
-      // 如果获取验证码失败
+      // 1.如果获取验证码失败
       if (result.code === 1) {
-        // 显示提示
+        // 2.显示提示
         this.showAlert(result.msg);
-        // 停止计时
+        // 3.停止计时
         if (this.computedTime) {
-          this.computedTime = 0; //倒计时清零
-          clearInterval(this.intervalId); //清除循环定时器
-          this.intervalId = undefined; //这一步是为了以防万一,可以去掉
+          // 4.倒计时清零
+          this.computedTime = 0;
+          // 5.清除循环定时器
+          clearInterval(this.intervalId);
+          this.intervalId = undefined; // 这一步是为了以防万一,可以去掉
         }
       }
     },
@@ -168,59 +173,65 @@ export default {
       //直接初始化一个登录请求返回结果
       let result;
 
-      // 短信登录
+      // 一、短信登录
       if (this.loginWay) {
-        //将对象内容解构出来,this.phone直接写phone
+        // 1.将对象内容解构出来,this.phone直接写phone
         const { phone, code, rightPhone } = this;
-        //校验计算属性中的rightPhone方法是否为false
+        // 2.校验计算属性中的rightPhone方法是否为false(也就是disabled,是否让按钮可点击)
         if (!this.rightPhone) {
+          // 3.手机号正则验证错误
           this.showAlert("手机号错误");
           return;
         }
+        // 4.验证码正则验证错误
         if (!/^\d{6}$/.test(code)) {
           this.showAlert("验证必须是6位数字");
           return;
         }
-        // 经过输入校验后发送ajax请求短信登录
+        // 5.经过输入校验后发送ajax请求短信登录
         result = await reqSmsLogin({ phone, code });
         console.log(result);
 
-        // 密码登录
+        // 二、密码登录
       } else {
-        const { name, pwd, captcha } = this; //将对象内容解构出来,下面就可以将this.name直接写name
-        // 如果v-model="name"为空
+        // 1.将对象内容解构出来,下面就可以将this.name直接写name
+        const { name, pwd, captcha } = this;
+        // 2.如果v-model="name"为空
         if (!this.name) {
           this.showAlert("用户名不能为空");
           return;
         }
-        // 如果v-model="pwd"为空
+        // 3.如果v-model="pwd"为空
         if (!this.pwd) {
           this.showAlert("密码不能为空");
           return;
         }
-        // 如果v-model="captcha"为空
+        // 4.如果v-model="captcha"为空
         if (!this.captcha) {
           this.showAlert("验证码不能为空");
           return;
         }
-        // 经过输入校验后再发送ajax请求密码登录
+        // 5.经过输入校验后再发送ajax请求密码登录
         result = await reqPwdLogin({ name, pwd, captcha });
       }
 
-      // 清除定时器(无论成功失败都要停止)
+      // 三、清除定时器(无论成功失败都要停止)
       if (this.computedTime) {
-        this.computedTime = 0; //倒计时清零
-        clearInterval(this.intervalId); //清除循环定时器
-        this.intervalId = undefined; //这一步是为了以防万一,可以去掉
+        // 1.倒计时清零
+        this.computedTime = 0;
+        // 2.清除循环定时器
+        clearInterval(this.intervalId);
+        // 3.这一步是为了以防万一,可以去掉
+        this.intervalId = undefined;
       }
 
-      // 统一处理 短信登录和密码登录 返回结果
+      // 四、统一处理 短信登录和密码登录 返回结果
       // 成功
       if (result.code === 0) {
         // 1.获取用户信息
         const user = result.data;
         // 2.保存用户信息user到vuex的state中
-        this.$store.dispatch("saveUser", user);//在'我的'组件中显示用户信息
+        this.$store.dispatch("saveUser", user); //在'我的'组件中显示用户信息
         // 3.跳转到登录后'我的'页面
         this.$router.replace("/profile");
         // 失败
@@ -236,10 +247,10 @@ export default {
       }
     },
 
-    // 获取图形验证码(点击可触发重新获取图片)
+    // 五、获取图形验证码(点击可触发重新获取图片)
     getCaptcha() {
-      // 要保证每次指定的src不一样，这里使用"?time="来拼接Date.now()的方法
-      // ref: 选中带有ref="captcha"的元素(算是vue的DOM操作)
+      // 1.要保证每次指定的src不一样，这里使用"?time="来拼接Date.now()的方法
+      // 2.ref: 选中带有ref="captcha"的元素(算是vue的DOM操作)
       this.$refs.captcha.src =
         "http://localhost:4000/captcha?time=" + Date.now();
     }
@@ -249,14 +260,28 @@ export default {
 
 <style lang="scss" scope>
 .login-container {
+  box-sizing: border-box; // 加了这个 padding就不会改变盒子宽高了
+  padding-top: 60px;
   position: relative;
   width: 100%;
   height: 100%;
-  padding-top: 60px;
   margin: 0;
   background-color: #fff;
   input:hover {
     border: 1px solid #02a774;
+  }
+  input {
+    box-sizing: border-box; // 加了这个 padding就不会改变盒子宽高了
+    padding-left: 5px;
+    height: 48px;
+    width: 100%;
+    font-size: 14px;
+    line-height: 21px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    outline: 0; // 取消边框样式
+    background-color: #fff;
   }
   .login-inner {
     width: 80%;
@@ -305,7 +330,7 @@ export default {
         .login-verification-get {
           position: absolute;
           right: 0;
-          top: 15%;
+          top: 25%;
           border: 0;
           background: transparent;
           // padding-top: 10px;
@@ -314,10 +339,6 @@ export default {
           &.right_phone {
             color: black;
           }
-        }
-        input {
-          height: 48px;
-          font-size: 14px;
         }
 
         // 复制过来的按钮
