@@ -1,5 +1,5 @@
 import Vue from "vue"
-import VueRouter from 'vue-router'
+// import VueRouter from 'vue-router'//也可以在router.js中引入使用
 import router from './router'//路由文件的用index.js,如果用router.js,就要在./router后面补上/router.js(所有文件都适用这个方法)
 import App from "./App.vue"
 import MintUI from 'mint-ui'
@@ -22,7 +22,7 @@ import './fiters'//加载 时间过滤器
 // Vue.component(Tabbar.name, Tabbar);
 // Vue.component(TabItem.name, TabItem);
 
-Vue.use(VueRouter)
+// Vue.use(VueRouter)
 // 全局化使用VueLazyload(注意要在MintUI之前,不然无法生效)
 Vue.use(VueLazyload, {
   loading//使用懒加载动画

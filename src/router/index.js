@@ -1,4 +1,5 @@
 // 路由模块对象
+import Vue from 'vue'
 import VueRouter from 'vue-router'
 // 常规引入路由组件方法
 // import Msite from '../pages/Msite/Msite.vue'
@@ -14,13 +15,20 @@ const Profile = () => import('../pages/Profile/Profile.vue')
 
 import Login from '../pages/Login/Login.vue'
 import UserInfo from '../pages/MSite/UserInfo.vue'
+
 import Shop from '../pages/Shop/Shop.vue'
 import ShopGoods from '../pages/Shop/ShopGoods.vue'
-import ShopInfo from '../pages/Shop/ShopInfo.vue'
 import ShopRatings from '../pages/Shop/ShopRatings.vue'
+import ShopInfo from '../pages/Shop/ShopInfo.vue'
+
+// 全局注册Vue-router组件
+Vue.use(VueRouter)
 
 // 直接 全局暴露 新建的vue路由
 export default new VueRouter({
+  //  去掉地址中的哈希#
+  // mode: 'history',
+  // 项目所有路由地址 数组
   routes: [
     {
       path: '/',
@@ -54,24 +62,22 @@ export default new VueRouter({
     {
       path: '/shop',
       component: Shop,
-      children: [
-        {
-          path: '/shop/goods',
-          component: ShopGoods
-        },
-        {
-          path: '/shop/info',
-          component: ShopInfo
-        },
-        {
-          path: '/shop/ratings',
-          component: ShopRatings
-        },
-        {
-          path: '',
-          redirect: '/shop/goods'
-        }//如果子路由地址是空
-      ]
+      children: [{
+        path: '/shop/goods',
+        component: ShopGoods
+      },
+      {
+        path: '/shop/ratings',
+        component: ShopRatings
+      },
+      {
+        path: '/shop/info',
+        component: ShopInfo
+      },
+      {
+        path: '/shop',
+        redirect: '/shop/goods'
+      }]
     },
 
     {

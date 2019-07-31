@@ -2,7 +2,15 @@
   <div class="shop-container">
     <!-- v-if判断是否已经获取到数据 -->
     <ul v-if="shops.length">
-      <li class="shop-li" v-for="shop in shops" :key="shop.id" @click="$router.push('/shop')">
+      <!-- to路由跳转也可以写成:to="'/shop?id='+item.id" -->
+      <!-- 这里传参的意思就是跳转入哪家店,用id识别 -->
+      <router-link
+        class="shop-li"
+        v-for="shop in shops"
+        :key="shop.id"
+        tag="li"
+        :to="{path:'/shop',query:{id:shop.id}}"
+      >
         <a href="#" class="shop-a">
           <div class="shop-left">
             <!-- <img src="./images/shop/1.jpg" alt /> -->
@@ -37,7 +45,7 @@
             </section>
           </div>
         </a>
-      </li>
+      </router-link>
     </ul>
     <!-- v-else如没有数据则显示图片 -->
     <ul v-else>

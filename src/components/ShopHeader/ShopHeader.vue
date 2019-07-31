@@ -144,12 +144,10 @@ export default {
   background: #fff;
   color: #fff;
   overflow: hidden;
-
   .shop-nav {
     background-size: cover;
     background-repeat: no-repeat;
     height: 50px;
-    padding: 5px 10px;
     position: relative;
     &::before {
       content: "";
@@ -181,7 +179,6 @@ export default {
     display: flex;
     background: #fff;
     text-align: center;
-
     img {
       box-shadow: 0 0 0.4vw 0 rgba(0, 0, 0, 0.2);
       position: absolute;
@@ -193,11 +190,9 @@ export default {
       margin-left: -33px;
       margin-top: -40px;
     }
-
     .header-content {
       flex: 1;
       width: 72%;
-
       .content-title {
         font-size: 20px;
         line-height: 24px;

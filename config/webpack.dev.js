@@ -26,7 +26,6 @@ module.exports = merge(base, {
       }
     },
 
-
     compress: true, //启用压缩
     port: 1207,     //端口
     open: true,      //自动打开浏览器 false关闭
