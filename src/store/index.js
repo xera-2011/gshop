@@ -13,8 +13,8 @@ Vue.use(Vuex)
 
 // 初始化仓储,并暴露全局
 export default new Vuex.Store({
-  state,
-  getters,
-  actions,
-  mutations
+	state,
+	getters,
+	actions,
+	mutations
 })

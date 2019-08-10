@@ -26,6 +26,7 @@ module.exports = {
         use: [
           // "style-loader",
           // "vue-style-loader",
+
           MiniCssExtractPlugin.loader,   // 抽离css
           "css-loader",// 用来解析@import这种语法,
           'postcss-loader'// 添加兼容浏览器的前缀(还需要一个postcss.config1.js)
@@ -35,7 +36,7 @@ module.exports = {
         test: /\.less$/,
         use: [
           'style-loader',
-          // MiniCssExtractPlugin.loader,   // 抽离css
+          // MiniCssExtractPlugin.loader,   // 抽离
           'css-loader',
           'less-loader'
         ]
@@ -44,7 +45,7 @@ module.exports = {
         test: /\.scss$/,
         use: [
           'style-loader',
-          // MiniCssExtractPlugin.loader,   // 抽离css
+          // MiniCssExtractPlugin.loader,   // 抽离
           'css-loader',
           'sass-loader'
         ]
@@ -67,8 +68,14 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          // options: {
+          //   outputPath: 'js/', //这里要注意一下，如果里面有引图片的话需要惊醒配置
+          // }
+        },
+
       },
       {
         test: /\.vue$/,
