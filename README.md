@@ -4,6 +4,44 @@
 
 
 
+# 项目截图
+
+### 首页
+
+![首页](shows/首页.jpg)
+
+### 搜索
+
+![搜索](shows/搜索.jpg)
+
+### 商家点餐
+
+![商家点餐](shows/商家点餐.jpg)
+
+### 商家评价
+
+![商家评价](shows/商家评价.jpg)
+
+### 商家信息
+
+![商家信息](shows/商家信息.jpg)
+
+### 个人信息
+
+![个人](shows/个人.jpg)
+
+
+
+### 订单
+
+![订单](shows/订单.jpg)
+
+### 登录
+
+
+
+![登录1](shows/登录1.jpg)
+
 # 外卖
 
 ## 运行开发
@@ -1892,40 +1930,3 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
 
 
-# 项目截图
-
-### 首页
-
-![首页](shows/首页.jpg)
-
-### 搜索
-
-![搜索](shows/搜索.jpg)
-
-### 商家点餐
-
-![商家点餐](shows/商家点餐.jpg)
-
-### 商家评价
-
-![商家评价](shows/商家评价.jpg)
-
-### 商家信息
-
-![商家信息](shows/商家信息.jpg)
-
-### 个人信息
-
-![个人](shows/个人.jpg)
-
-
-
-### 订单
-
-![订单](shows/订单.jpg)
-
-### 登录
-
-
-
-![登录1](shows/登录1.jpg)
